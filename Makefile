@@ -67,8 +67,11 @@ world:		configure
 configure:	autoconf
 	cd $(SRCDIR) && ./configure $(CONFARGS)
 
-autoconf:	$(SRCDIR)
+autoconf:	patch
 	cd $(SRCDIR) && autoreconf -fi
+
+patch:		$(SRCDIR)
+	cd $(SRCDIR) && $(GPATCH) -p1 < ../sunw_ssl.patch
 
 $(SRCDIR):
 	curl -LO $(URL) && gtar -zxf $(TAG).tar.gz
