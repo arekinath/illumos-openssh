@@ -23,7 +23,7 @@
 
 REPO =		arekinath/openssh-portable
 NAME =		openssh-portable
-TAG =		illumos-6.9p1-r1
+TAG =		illumos-6.9p1-r2
 URL =		https://github.com/$(REPO)/archive/$(TAG).tar.gz
 SRCDIR =	$(NAME)-$(TAG)
 
