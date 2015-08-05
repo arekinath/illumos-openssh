@@ -76,7 +76,7 @@ autoconf:	patch
 	cd $(SRCDIR) && autoreconf -fi
 
 patch:		$(SRCDIR)
-	cd $(SRCDIR) && $(GPATCH) -p1 < ../sunw_ssl.patch
+	cd $(SRCDIR) && $(GPATCH) -p1 < ../sunw_ssl.patch && $(GPATCH) -p1 < ../dtrace32.patch
 
 $(SRCDIR):
 	curl -LO $(URL) && gtar -zxf $(TAG).tar.gz
