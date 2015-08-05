@@ -38,17 +38,21 @@ endif
 
 PATH =		$(STRAPPROTO)/usr/bin:/usr/bin:/usr/sbin:/sbin:/opt/local/bin
 
+CFLAGS +=	-I$(DESTDIR)/usr/include -L$(DESTDIR)/usr/lib
 CFLAGS +=	-DSET_USE_PAM -DDEPRECATE_SUNSSH_OPT -DKRB5_BUILD_FIX
 CLFAGS +=	-DDTRACE_SFTP -DDISABLE_BANNER -DPAM_ENHANCEMENT
 CFLAGS +=	-DPAM_BUGFIX -DOPTION_DEFAULT_VALUE
+LDFLAGS +=	-L$(DESTDIR)/usr/lib
 LDFLAGS +=	-B direct -z nolazyload
+export CFLAGS
+export LDFLAGS
 
 CONFARGS =	--libexecdir=/usr/lib/ssh --sbindir=/usr/lib/ssh --sysconfdir=/etc/ssh --bindir=/usr/bin
-CONFARGS +=	--with-audit=solaris --with-libedit --with-kerberos5 --with-pam --with-sandbox=no
+CONFARGS +=	--with-audit=solaris --with-kerberos5 --with-pam --with-sandbox=no
 CONFARGS +=	--with-solaris-contracts --with-tcp-wrappers --with-4in6 --with-xauth=/usr/bin/xauth
 CONFARGS +=	--enable-strip=no --without-rpath --disable-lastlog --with-privsep-user=daemon
 
-all:		configure
+world:		configure
 	cd $(SRCDIR) && $(MAKE)
 
 configure:	autoconf
