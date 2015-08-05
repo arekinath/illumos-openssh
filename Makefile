@@ -40,12 +40,21 @@ PATH =		$(STRAPPROTO)/usr/bin:/usr/bin:/usr/sbin:/sbin:/opt/local/bin
 
 CFLAGS +=	-I$(DESTDIR)/usr/include -I$(STRAPPROTO)/usr/include -L$(DESTDIR)/usr/lib
 CFLAGS +=	-DSET_USE_PAM -DDEPRECATE_SUNSSH_OPT -DKRB5_BUILD_FIX
-CLFAGS +=	-DDTRACE_SFTP -DDISABLE_BANNER -DPAM_ENHANCEMENT
+CFLAGS +=	-DDTRACE_SFTP -DDISABLE_BANNER -DPAM_ENHANCEMENT
 CFLAGS +=	-DPAM_BUGFIX -DOPTION_DEFAULT_VALUE
 LDFLAGS +=	-L$(DESTDIR)/usr/lib
 LDFLAGS +=	-B direct -z nolazyload
+LDFLAGS +=	-Wl,-zassert-deflib -Wl,-zfatal-warnings
 export CFLAGS
 export LDFLAGS
+
+MAKE =		gmake
+GCC =		$(DESTDIR)/usr/bin/gcc
+GXX =		$(DESTDIR)/usr/bin/g++
+GCC.64 =	$(GCC) -m64
+GXX.64 =	$(GXX) -m64
+
+GPATCH =	/opt/local/bin/gpatch
 
 CONFARGS =	--libexecdir=/usr/lib/ssh --sbindir=/usr/lib/ssh --sysconfdir=/etc/ssh --bindir=/usr/bin
 CONFARGS +=	--with-audit=solaris --with-kerberos5 --with-pam --with-sandbox=no
