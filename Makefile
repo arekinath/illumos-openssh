@@ -38,7 +38,7 @@ endif
 
 PATH =		$(STRAPPROTO)/usr/bin:/usr/bin:/usr/sbin:/sbin:/opt/local/bin
 
-CFLAGS +=	-I$(DESTDIR)/usr/include -L$(DESTDIR)/usr/lib
+CFLAGS +=	-I$(DESTDIR)/usr/include -I$(STRAPPROTO)/usr/include -L$(DESTDIR)/usr/lib
 CFLAGS +=	-DSET_USE_PAM -DDEPRECATE_SUNSSH_OPT -DKRB5_BUILD_FIX
 CLFAGS +=	-DDTRACE_SFTP -DDISABLE_BANNER -DPAM_ENHANCEMENT
 CFLAGS +=	-DPAM_BUGFIX -DOPTION_DEFAULT_VALUE
