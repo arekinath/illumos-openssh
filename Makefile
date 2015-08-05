@@ -60,29 +60,49 @@ export GXX
 
 GPATCH =	/opt/local/bin/gpatch
 
-CONFARGS =	--libexecdir=/usr/lib/ssh --sbindir=/usr/lib/ssh --sysconfdir=/etc/ssh --bindir=/usr/bin
+CONFARGS =	--prefix=/usr
+CONFARGS +=	--libexecdir=/usr/lib/ssh --sbindir=/usr/lib/ssh --sysconfdir=/etc/ssh --bindir=/usr/bin
 CONFARGS +=	--with-audit=solaris --with-kerberos5 --with-pam --with-sandbox=no
 CONFARGS +=	--with-solaris-contracts --with-tcp-wrappers --with-4in6 --with-xauth=/usr/bin/xauth
 CONFARGS +=	--enable-strip=no --without-rpath --disable-lastlog --with-privsep-user=daemon
 CONFARGS +=	--without-openssl-header-check
 
+.PHONY:	world
 world:		configure
 	cd $(SRCDIR) && $(MAKE)
 
+.PHONY:	configure
 configure:	autoconf
 	cd $(SRCDIR) && ./configure $(CONFARGS)
 
-autoconf:	patch
+.PHONY:	autoconf
+autoconf:	$(SRCDIR)/.patched
 	cd $(SRCDIR) && autoreconf -fi
 
-patch:		$(SRCDIR)
-	cd $(SRCDIR) && $(GPATCH) -p1 < ../sunw_ssl.patch && $(GPATCH) -p1 < ../dtrace32.patch
+$(SRCDIR)/.patched:	$(SRCDIR)
+	cd $(SRCDIR) && \
+	$(GPATCH) -p1 < ../sunw_ssl.patch && \
+	$(GPATCH) -p1 < ../dtrace32.patch && \
+	touch $(SRCDIR)/.patched
 
 $(SRCDIR):
 	curl -LO $(URL) && gtar -zxf $(TAG).tar.gz
 
+.PHONY:	install
 install:
 	cd $(SRCDIR) && $(MAKE) install
 
+.PHONY:	manifest
+manifest:
+	cp manifest $(DESTDIR)/$(DESTNAME)
+
+.PHONY:	mancheck_conf
+mancheck_conf:
+
+.PHONY:	update
+update:
+	git pull --rebase
+
+.PHONY:	clean
 clean:
 	rm -fr $(SRCDIR) $(TAG).tar.gz
