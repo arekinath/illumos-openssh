@@ -64,6 +64,7 @@ CONFARGS =	--libexecdir=/usr/lib/ssh --sbindir=/usr/lib/ssh --sysconfdir=/etc/ss
 CONFARGS +=	--with-audit=solaris --with-kerberos5 --with-pam --with-sandbox=no
 CONFARGS +=	--with-solaris-contracts --with-tcp-wrappers --with-4in6 --with-xauth=/usr/bin/xauth
 CONFARGS +=	--enable-strip=no --without-rpath --disable-lastlog --with-privsep-user=daemon
+CONFARGS +=	--without-openssl-header-check
 
 world:		configure
 	cd $(SRCDIR) && $(MAKE)
