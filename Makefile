@@ -83,7 +83,7 @@ $(SRCDIR)/.patched:	$(SRCDIR)
 	cd $(SRCDIR) && \
 	$(GPATCH) -p1 < ../sunw_ssl.patch && \
 	$(GPATCH) -p1 < ../dtrace32.patch && \
-	touch $(SRCDIR)/.patched
+	touch .patched
 
 $(SRCDIR):
 	curl -LO $(URL) && gtar -zxf $(TAG).tar.gz
