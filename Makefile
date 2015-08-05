@@ -25,7 +25,7 @@ REPO =		arekinath/openssh-portable
 NAME =		openssh-portable
 TAG =		illumos-6.9p1-r1
 URL =		https://github.com/$(REPO)/archive/$(TAG).tar.gz
-SRCDIR =	$(BASE)/$(NAME)-$(TAG)
+SRCDIR =	$(NAME)-$(TAG)
 
 BASE =		$(PWD)
 DESTDIR =	$(BASE)/proto
@@ -58,7 +58,10 @@ autoconf:	$(SRCDIR)
 	cd $(SRCDIR) && autoreconf -fi
 
 $(SRCDIR):
-	curl -LO $(URL) && tar -zxf $(TAG).tar.gz
+	curl -LO $(URL) && gtar -zxf $(TAG).tar.gz
+
+install:
+	cd $(SRCDIR) && $(MAKE) install
 
 clean:
 	rm -fr $(SRCDIR) $(TAG).tar.gz
