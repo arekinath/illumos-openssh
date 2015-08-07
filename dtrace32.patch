@@ -1,5 +1,5 @@
 diff --git a/Makefile.in b/Makefile.in
-index 7987e2d..184d08c 100644
+index 623b887..6a89a22 100644
 --- a/Makefile.in
 +++ b/Makefile.in
 @@ -26,7 +26,7 @@ ASKPASS_PROGRAM=$(libexecdir)/ssh-askpass
@@ -11,7 +11,7 @@ index 7987e2d..184d08c 100644
  SMFMETHODDIR=$(DESTDIR)/lib/svc/method
  SMFNETMANIDIR=$(DESTDIR)/lib/svc/manifest/network
  PRIVSEP_PATH=@PRIVSEP_PATH@
-@@ -237,7 +237,7 @@ sftp_provider.h: $(srcdir)/sftp_provider.d
+@@ -236,7 +236,7 @@ sftp_provider.h: $(srcdir)/sftp_provider.d
  	    -o $(srcdir)/sftp_provider.h
  
  sftp_provider.o: sftp_provider.d sftp_provider.h sftp-server.o
@@ -20,7 +20,7 @@ index 7987e2d..184d08c 100644
  	    sftp-server.o -o sftp_provider.o
  
  clean:	regressclean
-@@ -355,7 +355,7 @@ install-files:
+@@ -354,7 +354,7 @@ install-files:
  	ln -s ./ssh$(EXEEXT) $(DESTDIR)$(bindir)/slogin
  	-rm -f $(DESTDIR)$(mandir)/$(mansubdir)1/slogin.1
  	ln -s ./ssh.1 $(DESTDIR)$(mandir)/$(mansubdir)1/slogin.1
@@ -28,4 +28,4 @@ index 7987e2d..184d08c 100644
 +	mkdir -p $(ROOTDLIBDIR) && cp $(srcdir)/sftp64.d $(ROOTDLIBDIR)/sftp.d
  	$(srcdir)/mkinstalldirs $(SMFMETHODDIR)
  	$(srcdir)/mkinstalldirs $(SMFNETMANIDIR)
- 	$(INSTALL) -m 555 smf/method $(SMFMETHODDIR)/sshd
+ 	$(INSTALL) -m 555 smf/method.sh $(SMFMETHODDIR)/sshd
