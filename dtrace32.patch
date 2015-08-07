@@ -1,5 +1,5 @@
 diff --git a/Makefile.in b/Makefile.in
-index cf3feed..587b271 100644
+index 7987e2d..184d08c 100644
 --- a/Makefile.in
 +++ b/Makefile.in
 @@ -26,7 +26,7 @@ ASKPASS_PROGRAM=$(libexecdir)/ssh-askpass
@@ -8,10 +8,10 @@ index cf3feed..587b271 100644
  SSH_PKCS11_HELPER=$(libexecdir)/ssh-pkcs11-helper
 -ROOTDLIBDIR64=$(DESTDIR)/usr/lib/dtrace/64
 +ROOTDLIBDIR=$(DESTDIR)/usr/lib/dtrace
+ SMFMETHODDIR=$(DESTDIR)/lib/svc/method
+ SMFNETMANIDIR=$(DESTDIR)/lib/svc/manifest/network
  PRIVSEP_PATH=@PRIVSEP_PATH@
- SSH_PRIVSEP_USER=@SSH_PRIVSEP_USER@
- STRIP_OPT=@STRIP_OPT@
-@@ -234,7 +234,7 @@ sftp_provider.h: $(srcdir)/sftp_provider.d
+@@ -237,7 +237,7 @@ sftp_provider.h: $(srcdir)/sftp_provider.d
  	    -o $(srcdir)/sftp_provider.h
  
  sftp_provider.o: sftp_provider.d sftp_provider.h sftp-server.o
@@ -20,12 +20,12 @@ index cf3feed..587b271 100644
  	    sftp-server.o -o sftp_provider.o
  
  clean:	regressclean
-@@ -352,7 +352,7 @@ install-files:
+@@ -355,7 +355,7 @@ install-files:
  	ln -s ./ssh$(EXEEXT) $(DESTDIR)$(bindir)/slogin
  	-rm -f $(DESTDIR)$(mandir)/$(mansubdir)1/slogin.1
  	ln -s ./ssh.1 $(DESTDIR)$(mandir)/$(mansubdir)1/slogin.1
 -	mkdir -p $(ROOTDLIBDIR64) && cp $(srcdir)/sftp64.d $(ROOTDLIBDIR64)/sftp64.d
 +	mkdir -p $(ROOTDLIBDIR) && cp $(srcdir)/sftp64.d $(ROOTDLIBDIR)/sftp.d
- 
- install-sysconf:
- 	if [ ! -d $(DESTDIR)$(sysconfdir) ]; then \
+ 	$(srcdir)/mkinstalldirs $(SMFMETHODDIR)
+ 	$(srcdir)/mkinstalldirs $(SMFNETMANIDIR)
+ 	$(INSTALL) -m 555 smf/method $(SMFMETHODDIR)/sshd
