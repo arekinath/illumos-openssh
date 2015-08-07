@@ -23,7 +23,7 @@
 
 REPO =		arekinath/openssh-portable
 NAME =		openssh-portable
-TAG =		illumos-6.9p1-r5
+TAG =		illumos-6.9p1-r6
 URL =		https://github.com/$(REPO)/archive/$(TAG).tar.gz
 SRCDIR =	$(NAME)-$(TAG)
 
@@ -65,7 +65,7 @@ CONFARGS +=	--libexecdir=/usr/lib/ssh --sbindir=/usr/lib/ssh --sysconfdir=/etc/s
 CONFARGS +=	--with-audit=solaris --with-kerberos5 --with-pam --with-sandbox=no
 CONFARGS +=	--with-solaris-contracts --with-tcp-wrappers --with-4in6 --with-xauth=/usr/bin/xauth
 CONFARGS +=	--enable-strip=no --without-rpath --disable-lastlog --with-privsep-user=daemon
-CONFARGS +=	--without-openssl-header-check
+CONFARGS +=	--without-openssl-header-check --with-key-dir=/var/ssh
 
 .PHONY:	world
 world:		configure
