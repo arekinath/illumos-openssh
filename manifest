@@ -37,8 +37,8 @@ d etc/ssh 0755 root sys
 f etc/ssh/ssh_config 0644 root sys
 f etc/ssh/moduli 0644 root sys
 f etc/ssh/sshd_config 0644 root sys
-d lib/svc/method
-d lib/svc/manifest/network
+d lib/svc/method 0755 root bin
+d lib/svc/manifest/network 0755 root bin
 f lib/svc/method/sshd 0555 root bin
 f lib/svc/manifest/network/ssh.xml 0444 root bin
 d var/ssh 0755 root sys
