@@ -1,8 +1,8 @@
 diff --git a/configure.ac b/configure.ac
-index efb2440..ae84799 100644
+index bb2dfa2..18da280 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -2304,8 +2304,8 @@ AC_ARG_WITH([ssl-engine],
+@@ -2329,8 +2329,8 @@ AC_ARG_WITH([ssl-engine],
  )
  
  if test "x$openssl" = "xyes" ; then
@@ -13,7 +13,7 @@ index efb2440..ae84799 100644
  		[Define if your ssl headers are included
  		with #include <openssl/header.h>])],
  		[
-@@ -2318,7 +2318,7 @@ if test "x$openssl" = "xyes" ; then
+@@ -2343,7 +2343,7 @@ if test "x$openssl" = "xyes" ; then
  			CPPFLAGS="-I/usr/local/ssl/include ${saved_CPPFLAGS}"
  			AC_CHECK_HEADER([openssl/opensslv.h], ,
  			    [AC_MSG_ERROR([*** OpenSSL headers missing - please install first or check config.log ***])])
@@ -22,7 +22,7 @@ index efb2440..ae84799 100644
  				[
  					AC_MSG_ERROR([*** Can't find recent OpenSSL libcrypto (see config.log for details) ***])
  				]
-@@ -2462,16 +2462,16 @@ if test "x$openssl" = "xyes" ; then
+@@ -2487,16 +2487,16 @@ if test "x$openssl" = "xyes" ; then
  	)
  
  	AC_CHECK_FUNCS([ \
@@ -49,7 +49,7 @@ index efb2440..ae84799 100644
  	])
  
  	if test "x$openssl_engine" = "xyes" ; then
-@@ -2556,8 +2556,8 @@ if test "x$openssl" = "xyes" ; then
+@@ -2581,8 +2581,8 @@ if test "x$openssl" = "xyes" ; then
  		]
  	)
  
@@ -60,7 +60,7 @@ index efb2440..ae84799 100644
  		    [Define if libcrypto has EVP_CIPHER_CTX_ctrl])])
  
  	AC_MSG_CHECKING([if EVP_DigestUpdate returns an int])
-@@ -2593,7 +2593,7 @@ if test "x$openssl" = "xyes" ; then
+@@ -2618,7 +2618,7 @@ if test "x$openssl" = "xyes" ; then
  	AC_CHECK_FUNCS([crypt DES_crypt])
  
  	# Search for SHA256 support in libc and/or OpenSSL
@@ -69,7 +69,7 @@ index efb2440..ae84799 100644
  	    [unsupported_algorithms="$unsupported_algorithms \
  		hmac-sha2-256 hmac-sha2-512 \
  		diffie-hellman-group-exchange-sha256 \
-@@ -2601,7 +2601,7 @@ if test "x$openssl" = "xyes" ; then
+@@ -2626,7 +2626,7 @@ if test "x$openssl" = "xyes" ; then
  	     ]
  	)
  	# Search for RIPE-MD support in OpenSSL
@@ -102,7 +102,7 @@ index 13b63c2..c6fe9f9 100644
  struct ssh_digest_ctx {
  	int alg;
 diff --git a/kex.c b/kex.c
-index 8de9bfc..209427a 100644
+index 2683b11..f3ed41b 100644
 --- a/kex.c
 +++ b/kex.c
 @@ -60,7 +60,7 @@
@@ -181,7 +181,7 @@ index 8c1b3b9..40c2dc8 100644
 +#endif /* !defined(HAVE_SUNW_EVP_SHA256) && (OPENSSL_VERSION_NUMBER >= 0x00907000L) */
  
 diff --git a/myproposal.h b/myproposal.h
-index 84b63bc..b30eaf5 100644
+index 46e5b98..49e93e4 100644
 --- a/myproposal.h
 +++ b/myproposal.h
 @@ -66,7 +66,7 @@
